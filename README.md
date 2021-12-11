@@ -1,9 +1,9 @@
 ﻿# Jarkom-Modul-5-T12-2021
 
 Nama Kelompok :  
-- Ian Felix Jonathan Simanjuntak (nomor 1-6)
-- Muhammad Zakky Ghufron (Nomor 7-10)
-- Muhammad Naufal Imantyasto (Nomor 11 -13)
+- Ian Felix Jonathan Simanjuntak (nomor A-D)
+- Muhammad Zakky Ghufron (Nomor 1-3)
+- Muhammad Naufal Imantyasto (Nomor 4 -6)
 
 ### Gambar Topologi
 ![image](https://user-images.githubusercontent.com/50267676/145672393-531b8c88-4303-4e3d-9791-2a7d60431ba6.png)
@@ -372,12 +372,12 @@ iptables -A INPUT -s 192.217.7.0/25 -j REJECT
 iptables -A INPUT -s 192.217.0.0/22 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
 iptables -A INPUT -s 192.217.0.0/22 -j REJECT
 ```
-- Testing pada Blueone dan Chiper
-![image](https://user-images.githubusercontent.com/50267676/145674276-1abac2d0-3cb2-4918-8409-fc6a33bf518a.png)
-pada doriki adalah hari sabtu pukul 11, oleh karena itu Blueno dan Cipher tidak akan bisa mengakses Doriki
-![image](https://user-images.githubusercontent.com/50267676/145674312-beb459e9-1c09-40a3-8ca4-d3434978f917.png)
-![image](https://user-images.githubusercontent.com/50267676/145674324-53d2813d-ddb5-4e72-b6cc-40db1e4092e9.png)
-Dapar dilihat bahwa kedua Node tersebut tidak bisa mengkakses Doriki
+- Testing pada Blueone dan Chiper  
+![image](https://user-images.githubusercontent.com/50267676/145674276-1abac2d0-3cb2-4918-8409-fc6a33bf518a.png)  
+pada doriki adalah hari sabtu pukul 11, oleh karena itu Blueno dan Cipher tidak akan bisa mengakses Doriki  
+![image](https://user-images.githubusercontent.com/50267676/145674312-beb459e9-1c09-40a3-8ca4-d3434978f917.png)  
+![image](https://user-images.githubusercontent.com/50267676/145674324-53d2813d-ddb5-4e72-b6cc-40db1e4092e9.png)  
+Dapat dilihat bahwa kedua Node tersebut tidak bisa mengakses Doriki
 
 ### Soal5
 Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
@@ -388,10 +388,10 @@ Sama seperti soal sebelumnya, disini kami hanya mengganti jam dan juga hari.
 iptables -A INPUT -s 192.217.4.0/23 -m time --timestart 07:00 --timestop 15:00 -j REJECT 
 iptables -A INPUT -s 192.217.6.0/24 -m time --timestart 07:00 --timestop 15:00 -j REJECT
 ```
-- Testing pada Elena dan Fukurou
-![image](https://user-images.githubusercontent.com/50267676/145674409-fb61e9db-1a76-4057-bdde-9834625413fe.png)
-Dapat dilihat bahwa waktu pada server adalah hari sabtu pukul 11. Seharusnya Elena dan Fukurou tidak dapat menggakses Doriki
-![image](https://user-images.githubusercontent.com/50267676/145674446-ddf40152-e16b-46ad-bf14-68685e23245b.png)
+- Testing pada Elena dan Fukurou  
+![image](https://user-images.githubusercontent.com/50267676/145674409-fb61e9db-1a76-4057-bdde-9834625413fe.png)  
+Dapat dilihat bahwa waktu pada server adalah hari sabtu pukul 11. Seharusnya Elena dan Fukurou tidak dapat menggakses Doriki  
+![image](https://user-images.githubusercontent.com/50267676/145674446-ddf40152-e16b-46ad-bf14-68685e23245b.png)  
 ![image](https://user-images.githubusercontent.com/50267676/145674457-a1093d27-aec2-44f8-8401-cdf2a6a9263b.png)
 
 ### Soal6
@@ -412,10 +412,12 @@ Pada client jalankan kode
 ```
 nc 192.217.7.139 80
 ```
-Berikut adalah hasilnya
-![image](https://user-images.githubusercontent.com/50267676/145674629-cdfaa5e4-54f3-45d9-873b-79ebd26c53e8.png)
-![image](https://user-images.githubusercontent.com/50267676/145674647-420dfc2f-c286-491e-ba38-94827f0e81de.png)
-yang menghandle request dari elena adalah Jorge
-![image](https://user-images.githubusercontent.com/50267676/145674665-1a80f6b4-7f6b-414c-9482-d83de21cc548.png)
-![image](https://user-images.githubusercontent.com/50267676/145674672-a702d14c-87ea-4ade-b5d2-62acfed49d85.png)
-yang menghandle request dari fukurou adalah Maingate. Dengan begitu load balancer nya sudah berjalan dan setiap request sudah di distribusikan secara merata
+Berikut adalah hasilnya  
+![image](https://user-images.githubusercontent.com/50267676/145674629-cdfaa5e4-54f3-45d9-873b-79ebd26c53e8.png)  
+![image](https://user-images.githubusercontent.com/50267676/145674647-420dfc2f-c286-491e-ba38-94827f0e81de.png)  
+yang menghandle request dari elena adalah Jorge  
+![image](https://user-images.githubusercontent.com/50267676/145674665-1a80f6b4-7f6b-414c-9482-d83de21cc548.png)  
+![image](https://user-images.githubusercontent.com/50267676/145674672-a702d14c-87ea-4ade-b5d2-62acfed49d85.png)  
+yang menghandle request dari fukurou adalah Maingate. Dengan begitu load balancer nya sudah berjalan dan setiap request sudah di distribusikan secara merata  
+
+### Kesulitan
