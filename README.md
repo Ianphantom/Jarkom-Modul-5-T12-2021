@@ -365,6 +365,7 @@ iptables -t nat -A POSTROUTING -s 192.217.0.0/21 -o eth0 -j SNAT --to-source "$i
 karena IP Foosha diatur secara DHCP oleh karena itu kami menggunakan beberapa kode untuk mengambil IP Foosha.
 
 - Testing ping dari salah satu node
+
 ![image](https://user-images.githubusercontent.com/50267676/145673825-3735a517-5e43-4df4-8c68-a9e4f3d68e57.png)
 
 
@@ -390,10 +391,12 @@ iptables -A INPUT -p ICMP -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 ```
 Dari kedua kode tersebut dapat dilihat bahwa semua INPUT dengan protokol ICMP kami batas cuman 3 saja, sisanya di drop
 - Testing ping dari 4 node
+
 ![image](https://user-images.githubusercontent.com/50267676/145674048-fd2ffea9-b2c7-45b6-ab4b-24bae33b8394.png)
 ![image](https://user-images.githubusercontent.com/50267676/145674064-717da6e5-a246-43dd-a79b-acc1b24c9b96.png)
 ![image](https://user-images.githubusercontent.com/50267676/145674076-8f33668c-b421-4358-bee4-a258da702b77.png)
 ![image](https://user-images.githubusercontent.com/50267676/145674084-7b5366c1-acda-4757-a174-f9544853d534.png)
+
 Dapat dilihat bahwa node Fukurou tidak dapat melakukan ping menuju 192.217.7.138 lagi 
 
 
