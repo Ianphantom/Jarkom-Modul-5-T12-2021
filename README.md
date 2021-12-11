@@ -352,11 +352,50 @@ Berikut adalah tampilan dari setiap subnet yang sudah mendapatkan IP dari DHCP s
 ![image](https://user-images.githubusercontent.com/50267676/145673627-3e97830d-a031-4afd-84f4-e96886fd194d.png)
 ![image](https://user-images.githubusercontent.com/50267676/145673643-9de3bd04-b5f2-45d2-a8a4-074ff7a3f11a.png)
 ![image](https://user-images.githubusercontent.com/50267676/145673654-8b16fe8b-ff59-4564-9f65-c6e29bff8b88.png)
+
 ### Soal1
+Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE
+##### Jawaban 
+- Pada Foosha tambahkan kode berikut ini
+```
+ipEth0="$(ip -br a | grep eth0 | awk '{print $NF}' | cut -d'/' -f1)"
+
+iptables -t nat -A POSTROUTING -s 192.217.0.0/21 -o eth0 -j SNAT --to-source "$ipEth0"
+```
+karena IP Foosha diatur secara DHCP oleh karena itu kami menggunakan beberapa kode untuk mengambil IP Foosha.
+
+- Testing ping dari salah satu node
+![image](https://user-images.githubusercontent.com/50267676/145673825-3735a517-5e43-4df4-8c68-a9e4f3d68e57.png)
+
 
 ### Soal2
+Kalian diminta untuk mendrop semua akses HTTP dari luar Topologi kalian pada server yang merupakan DHCP Server dan DNS Server demi menjaga keamanan
+
+- Pada foosha jalankan kode berikut ini
+```
+iptables -A FORWARD -d 192.217.7.136/29 -i eth0 -p tcp --dport 80 -j DROP
+```
+Dari kode tersebut dapat dilihat bahwa semua paket TCP yang menuju 192.217.7.136/29 yang melalui eth0 menuju port 80 akan di drop
+
 
 ### Soal3
+Karena kelompok kalian maksimal terdiri dari 3 orang. Luffy meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
+- Pada DHCP Server (Jipangu) jalankan kode berikut
+```
+iptables -A INPUT -p ICMP -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+- Pada DNS Server (Doriki) Jalankan kode berikut
+```
+iptables -A INPUT -p ICMP -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+Dari kedua kode tersebut dapat dilihat bahwa semua INPUT dengan protokol ICMP kami batas cuman 3 saja, sisanya di drop
+- Testing ping dari 4 node
+![image](https://user-images.githubusercontent.com/50267676/145674048-fd2ffea9-b2c7-45b6-ab4b-24bae33b8394.png)
+![image](https://user-images.githubusercontent.com/50267676/145674064-717da6e5-a246-43dd-a79b-acc1b24c9b96.png)
+![image](https://user-images.githubusercontent.com/50267676/145674076-8f33668c-b421-4358-bee4-a258da702b77.png)
+![image](https://user-images.githubusercontent.com/50267676/145674084-7b5366c1-acda-4757-a174-f9544853d534.png)
+Dapat dilihat bahwa node Fukurou tidak dapat melakukan ping menuju 192.217.7.138 lagi 
+
 
 Kemudian kalian diminta untuk membatasi akses ke Doriki yang berasal dari subnet Blueno, Cipher, Elena dan Fukuro dengan beraturan sebagai berikut
 ### Soal4
@@ -421,3 +460,4 @@ yang menghandle request dari elena adalah Jorge
 yang menghandle request dari fukurou adalah Maingate. Dengan begitu load balancer nya sudah berjalan dan setiap request sudah di distribusikan secara merata  
 
 ### Kesulitan
+- Karena pada nomor 2 disebutkan bahwa "mendrop akses dari luar topologi", maka kami awalnya sedikit bingung bagaimnaa cara melakukan testing di nomor tersebut. Tetapi pada saat demo asisten tetap membenarkan karena tidak mungkin melakukan test dari luar topologi
